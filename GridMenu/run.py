@@ -9,12 +9,16 @@ alphabet = list(string.ascii_lowercase)
 
 grid = GridMenu(6,alphabet)
 
+grid.clear()
+grid.move('D')
+print grid.getPosition()
 
-print grid.moveMany(['E']) ; grid.clear()
-print grid.moveMany(['D', 'E']) ; grid.clear()
-print grid.moveMany(['U', 'E']) ; grid.clear()
-print grid.moveMany(['R', 'E']) ; grid.clear()
-print grid.moveMany(['L', 'E']) ; grid.clear()
+
+# print grid.moveMany(['E']) ; grid.clear()
+# print grid.moveMany(['D', 'E']) ; grid.clear()
+# print grid.moveMany(['U', 'E']) ; grid.clear()
+# print grid.moveMany(['R', 'E']) ; grid.clear()
+# print grid.moveMany(['L', 'E']) ; grid.clear()
 
 
 
