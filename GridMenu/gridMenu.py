@@ -4,10 +4,12 @@ import math
 
 ENTER	= 'E'
 BACKSP	= 'B'
+SPACE	= 'S'
 DOWN 	= 'D'
 UP		= 'U'
 LEFT	= 'L'
 RIGHT	= 'R'
+
 DEBUG   = 0
 
 class GridMenu(object):
@@ -17,8 +19,6 @@ class GridMenu(object):
 		self.cols = cols
 		self.alphabet = alphabet
 		self.last = len(alphabet)-1
-		
-		
 		
 		rows = self.last / self.cols
 		if self.last % self.cols:
@@ -44,8 +44,8 @@ class GridMenu(object):
 	def move(self, move):
 		if move == DOWN:
 			if self.atBottomEdge():
-				self.position += self.cols - self.full
-				self.log_debug("DOWN + atBottomEdge: " + self.getLetter())
+				self.position = self.position + self.cols - self.full
+				self.log_debug("DOWN + AtBottomEdge: " + self.getLetter())
 			else:
 				self.position += self.cols
 				self.log_debug("DOWN + Else: " + self.getLetter())
@@ -57,7 +57,7 @@ class GridMenu(object):
 		elif move == UP:
 			if self.atTopEdge():
 				self.position = self.position - self.cols + self.full
-				self.log_debug("UP + atTopEdge: " + self.getLetter())
+				self.log_debug("UP + AtTopEdge: " + self.getLetter())
 			else:
 				self.position -= self.cols
 				self.log_debug("UP + Else: " + self.getLetter())
@@ -69,7 +69,7 @@ class GridMenu(object):
 		elif move == RIGHT:
 			if self.atRightEdge():
 				self.position = self.position - self.cols + 1
-				self.log_debug("RIGHT + atRightEdge: " + self.getLetter())
+				self.log_debug("RIGHT + AtRightEdge: " + self.getLetter())
 			else:
 				self.position += 1
 				self.log_debug("RIGHT + Else: " + self.getLetter())
@@ -80,8 +80,8 @@ class GridMenu(object):
 			
 		elif move == LEFT:
 			if self.atLeftEdge():
-				self.position += self.cols - 1
-				self.log_debug("LEFT + atLeftEdge: " + self.getLetter())
+				self.position = self.position + self.cols - 1
+				self.log_debug("LEFT + AtLeftEdge: " + self.getLetter())
 			else:
 				self.position -= 1
 				self.log_debug("LEFT + Else: " + self.getLetter())
@@ -89,9 +89,6 @@ class GridMenu(object):
 			if self.inEmptyPos():
 				self.move(LEFT)
 				self.log_debug("LEFT + InEmpty: " + self.getLetter())
-				
-		else:
-			pass
 			
 			
 	def clear(self):
