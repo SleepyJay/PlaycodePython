@@ -3,7 +3,7 @@
 import sys
 import string
 
-from gridMenu import GridMenu
+from GridMenu import GridMenu
 
 alphabet = list(string.ascii_lowercase)
 

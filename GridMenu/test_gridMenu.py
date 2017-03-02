@@ -6,7 +6,7 @@ import sys
 import string
 import unittest
 
-from gridMenu import GridMenu
+from GridMenu import GridMenu
 
 alphabet = list(string.ascii_lowercase)
 grid = GridMenu(6, alphabet)
