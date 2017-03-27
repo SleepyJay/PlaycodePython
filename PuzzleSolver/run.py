@@ -1,8 +1,8 @@
 # Run Solvers
 
 import sys
-from puzzles.diamondPuzzle import DiamondPuzzle
-from puzzles.lightsOutPuzzle import LightsOutPuzzle
+from puzzles.DiamondPuzzle import DiamondPuzzle
+from puzzles.LightsOutPuzzle import LightsOutPuzzle
 
 action = "all"
 if len(sys.argv) > 1:

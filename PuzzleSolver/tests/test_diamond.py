@@ -2,7 +2,7 @@
 
 # Unit tests
 
-from puzzles.diamondPuzzle import DiamondPuzzle
+from puzzles.DiamondPuzzle import DiamondPuzzle
 import unittest
 
 dp = DiamondPuzzle(starting_point = '1010010101', goal = '1100100011')
