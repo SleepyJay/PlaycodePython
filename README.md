@@ -1,5 +1,13 @@
 # PlaycodePython
 
-A place for small ideas and experiments, written in Python. 
+##Small ideas and experiments, written in Python. 
 
-(Don't judge it too harshly. :) )
+
+### Projects:
+
+* BlockStacking: ditch the brute force
+* NameDistro: fun with namedtuples
+* GridMenu: wrap-around cursor navigation
+* LondonTube: walking train lines
+* PuzzleSolver: too busy writing code to solve problems...wait, what?
+
