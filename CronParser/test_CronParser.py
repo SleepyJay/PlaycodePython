@@ -4,8 +4,10 @@
 
 import unittest
 import collections
+import inspect
 
 from CronParser import CronParser
+from CronParser import LineType
 
 class Test_CronParser(unittest.TestCase):
 
@@ -18,12 +20,12 @@ class Test_CronParser(unittest.TestCase):
             ['name', 'line', 'expected'] )
 
         self.test_data = [
-            self.TestItem('Empty line', '', 'empty'),
-            self.TestItem('Comment line', '# Foo', 'comment'),
+            self.TestItem('Empty line', '', LineType.empty),
+            self.TestItem('Comment line', '# Foo', LineType.comment),
             self.TestItem('Missing command *:01', '1 * * * *', None),
             self.TestItem('Missing schedule', 'echo Foo', None),
-            self.TestItem('Daily *:01', '1 * * * * echo Daily', 'cron'),
-            self.TestItem('Daily *:01, pound', '1 * * * * # echo Daily', 'cron'),
+            self.TestItem('Daily *:01', '1 * * * * echo Daily', LineType.cron),
+            self.TestItem('Daily *:01, pound', '1 * * * * # echo Daily', LineType.cron),
         ]
 
         self.expected_test_data_cron_count = 2
@@ -60,6 +62,8 @@ class Test_CronParser(unittest.TestCase):
         list_count = len(parsed_list)
         self.assertEqual(list_count, self.expected_test_file_cron_count,
             "ParsedFiles resulted in {} crons".format(list_count))
+
+
 
 if __name__ == '__main__':
 	unittest.main(verbosity=2)
