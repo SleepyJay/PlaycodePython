@@ -11,7 +11,7 @@ class Test_CronParser(unittest.TestCase):
 
     #
     def setup(self):
-        print "\n"
+        print ""
 
         self.cron_parser = CronParser()
         self.TestItem = collections.namedtuple( 'TestItem',
@@ -27,6 +27,7 @@ class Test_CronParser(unittest.TestCase):
         ]
 
         self.expected_test_data_cron_count = 2
+        self.expected_test_file_cron_count = 2
 
 
     #
@@ -35,7 +36,8 @@ class Test_CronParser(unittest.TestCase):
         for i in range(len(self.test_data)):
             test = self.test_data[i]
             parsed = self.cron_parser.lexLine(test.line, i)
-            self.assertEqual(parsed, test.expected, "Line ({}) parsed ok ({})".format(test.line, parsed))
+            self.assertEqual(parsed, test.expected,
+                "Line ({}) parsed ok ({})".format(test.line, parsed))
 
     #
     def test_ParseLines(self):
@@ -49,7 +51,16 @@ class Test_CronParser(unittest.TestCase):
         self.assertEqual(list_count, self.expected_test_data_cron_count,
             "ParsedLines resulted in {} crons".format(list_count))
         
+
+    #
+    def test_ParseFile(self):
+        self.setup()
+        parsed_list = self.cron_parser.parseFile('./crontab_test')
         
+        list_count = len(parsed_list)
+        self.assertEqual(list_count, self.expected_test_file_cron_count,
+            "ParsedFiles resulted in {} crons".format(list_count))
+
 if __name__ == '__main__':
 	unittest.main(verbosity=2)
 

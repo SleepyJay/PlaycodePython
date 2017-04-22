@@ -17,6 +17,7 @@ class CronParser(object):
         for i in range(len(lines)):
             line = lines[i]
             parsed_line = self.lexLine(line, i)
+            #print "{} ==> {}".format(line, parsed_line)
 
             if parsed_line == 'cron':
                 self.parsed_lines.append(parsed_line)
@@ -26,7 +27,8 @@ class CronParser(object):
 
     #
     def lexLine(self, line, lno):
-        print "{}: {}".format(lno, line)
+        #print "{}: {}".format(lno, line)
+        line = line.rstrip()
         if self.re_cron_line.match(line):
             return "cron"
         elif self.re_comment_line.match(line):
@@ -35,26 +37,16 @@ class CronParser(object):
             return "empty"
         else:
             return None
+
+    #
+    def parseFile(self, file_path):
+        f = open(file_path, 'r')
+
+        if not f:
+            # Exception?
+            pass
         
+        lines = map( (lambda x: x.rstrip()), f.readlines())
+        return self.parseLines(lines)
 
 
-# *********
-    # # # #
-    # # # def loadFile(self, file_path):
-    # # #     f = open(file_path, 'r')
-    # # #
-    # # #     if not f:
-    # # #         # Exception?
-    # # #         pass
-    # # #
-    # # #     line_num = 0
-    # # #
-    # # #     for line in f:
-    # # #         line_num += 1
-    # # #
-    # # #         if line.startswith('#'):
-    # # #             continue
-    # # #       text_list = split('\n', crontab_text)
-    # # #
-    # # #
-    # # #
