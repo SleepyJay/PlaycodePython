@@ -6,8 +6,9 @@ class CronParser(object):
 
     #
     def __init__(self):
-        #self.re_cron_line = re.compile('\s*([^\s])\s+([^\s])\s+([^\s])\s+([^\s])\s+([^\s])\s+.+')
         self.re_cron_line = re.compile('\s*(([^\s])\s+){5}.+')
+        self.re_comment_line = re.compile('^\s*#')
+        self.re_empty_line = re.compile('^\s*$')
         
     #
     def loadFile(self, file_path):
@@ -32,15 +33,19 @@ class CronParser(object):
         
         for i in range(len(text_list)):
             line = text_list[i]
-            parsed = self.parseLine(line, i)
+            parsed = self.lexLine(line, i)
 
         
     #
-    def parseLine(self, line, lno):
+    def lexLine(self, line, lno):
         print "{}: {}".format(lno, line)
         if self.re_cron_line.match(line):
-            return True
+            return "cron"
+        elif self.re_comment_line.match(line):
+            return "comment"
+        elif self.re_empty_line.match(line):
+            return "empty"
         else:
-            return False
+            return None
 
     
