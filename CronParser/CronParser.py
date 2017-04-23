@@ -15,7 +15,7 @@ class CronParser(object):
         self.re_comment_line = re.compile('^\s*#')
         self.re_empty_line = re.compile('^\s*$')
 
-        self.parsed_lines = []
+        self.parsed_entries = []
 
     #
     def parseLines(self, lines):
@@ -24,7 +24,7 @@ class CronParser(object):
             parsed_line = self.lexLine(line, i)
             #print "{} ==> {}".format(line, parsed_line)
 
-        return self.parsed_lines
+        return self.parsed_entries
 
 
     #
@@ -36,7 +36,7 @@ class CronParser(object):
         if m:
             print "cron: {}".format(m.group(1,3))
             entry = CronEntry(m.group(1), m.group(3))
-            self.parsed_lines.append(entry)
+            self.parsed_entries.append(entry)
             return LineType.cron
 
         if self.re_comment_line.match(line):

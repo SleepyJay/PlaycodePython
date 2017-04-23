@@ -17,17 +17,20 @@ class Test_CronParser(unittest.TestCase):
 
         self.cron_parser = CronParser()
         self.TestItem = collections.namedtuple( 'TestItem',
-            ['name', 'line', 'expected'] )
+            ['name', 'line', 'expected_type', 'expected_values'] )
 
         self.test_data = [
-            self.TestItem('Empty line', '', LineType.empty),
-            self.TestItem('Comment line', '# Foo', LineType.comment),
-            self.TestItem('Missing command *:01', '1 * * * *', None),
-            self.TestItem('Missing schedule', 'echo Foo', None),
+            self.TestItem('Empty line', '', LineType.empty, []),
+            self.TestItem('Comment line', '# Foo', LineType.comment, []),
+            self.TestItem('Missing command *:01', '1 * * * *', None, []),
+            self.TestItem('Missing schedule', 'echo Foo', None, []),
 
-            self.TestItem('Daily *:01', '1 * * * * echo Daily', LineType.cron),
-            self.TestItem('Daily nums', '1 2 3 4 5 echo Daily', LineType.cron),
-            self.TestItem('Daily *:01, pound', '1 * * * * # echo Daily', LineType.cron),
+            self.TestItem('Daily *:01', '1 * * * * echo Daily',
+                LineType.cron, ['1','*', '*','*','*']),
+            self.TestItem('Daily nums', '1 2 3 4 5 echo Daily',
+                LineType.cron, ['1', '2', '3', '4', '5']),
+            self.TestItem('Daily *:01, pound', '1 * * * * # echo Daily',
+                LineType.cron, ['1','*','*','*','*']),
         ]
 
         self.expected_test_data_cron_count = 3
@@ -40,8 +43,16 @@ class Test_CronParser(unittest.TestCase):
         for i in range(len(self.test_data)):
             test = self.test_data[i]
             type = self.cron_parser.lexLine(test.line, i)
-            self.assertEqual(type, test.expected,
+            self.assertEqual(type, test.expected_type,
                 "Line ({}) parsed ok ({})".format(test.line, type))
+
+            if type == LineType.cron:
+                cron = self.cron_parser.parsed_entries[-1]
+                entry_list = [cron.minute, cron.hour, cron.day_month, cron.month, cron.day_week]
+
+                self.assertEqual(entry_list, test.expected_values,
+                    "Entry ({}) == ({})".format(entry_list, test.expected_values))
+                
 
     #
     def test_ParseLines(self):
