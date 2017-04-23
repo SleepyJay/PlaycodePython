@@ -11,7 +11,7 @@ class CronParser(object):
 
     #
     def __init__(self):
-        self.re_cron_line = re.compile('\s*(([^\s])\s+){5}.+')
+        self.re_cron_line = re.compile('\s*(([^\s]\s+){5})(.+)')
         self.re_comment_line = re.compile('^\s*#')
         self.re_empty_line = re.compile('^\s*$')
 
@@ -24,9 +24,6 @@ class CronParser(object):
             parsed_line = self.lexLine(line, i)
             #print "{} ==> {}".format(line, parsed_line)
 
-            if parsed_line == LineType.cron:
-                self.parsed_lines.append(parsed_line)
-
         return self.parsed_lines
 
 
@@ -34,14 +31,15 @@ class CronParser(object):
     def lexLine(self, line, lno):
         #print "{}: {}".format(lno, line)
         line = line.rstrip()
-        return self.matchLine(line, lno)
 
-    
-    #
-    def matchLine(self, line, lno):
-        if self.re_cron_line.match(line):
+        m = self.re_cron_line.match(line)
+        if m:
+            print "cron: {}".format(m.group(1,3))
+            entry = CronEntry(m.group(1), m.group(3))
+            self.parsed_lines.append(entry)
             return LineType.cron
-        elif self.re_comment_line.match(line):
+
+        if self.re_comment_line.match(line):
             return LineType.comment
         elif self.re_empty_line.match(line):
             return LineType.empty

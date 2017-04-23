@@ -24,11 +24,13 @@ class Test_CronParser(unittest.TestCase):
             self.TestItem('Comment line', '# Foo', LineType.comment),
             self.TestItem('Missing command *:01', '1 * * * *', None),
             self.TestItem('Missing schedule', 'echo Foo', None),
+
             self.TestItem('Daily *:01', '1 * * * * echo Daily', LineType.cron),
+            self.TestItem('Daily nums', '1 2 3 4 5 echo Daily', LineType.cron),
             self.TestItem('Daily *:01, pound', '1 * * * * # echo Daily', LineType.cron),
         ]
 
-        self.expected_test_data_cron_count = 2
+        self.expected_test_data_cron_count = 3
         self.expected_test_file_cron_count = 2
 
 
@@ -37,9 +39,9 @@ class Test_CronParser(unittest.TestCase):
         self.setup()
         for i in range(len(self.test_data)):
             test = self.test_data[i]
-            parsed = self.cron_parser.lexLine(test.line, i)
-            self.assertEqual(parsed, test.expected,
-                "Line ({}) parsed ok ({})".format(test.line, parsed))
+            type = self.cron_parser.lexLine(test.line, i)
+            self.assertEqual(type, test.expected,
+                "Line ({}) parsed ok ({})".format(test.line, type))
 
     #
     def test_ParseLines(self):
@@ -49,6 +51,7 @@ class Test_CronParser(unittest.TestCase):
             lines.append(test.line)
 
         parsed_list = self.cron_parser.parseLines(lines)
+        print "ParsedLines: {}".format(parsed_list)
         list_count = len(parsed_list)
         self.assertEqual(list_count, self.expected_test_data_cron_count,
             "ParsedLines resulted in {} crons".format(list_count))
