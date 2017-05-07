@@ -1,10 +1,10 @@
-# Block Stacking (v 1.4)
+# Block Stacking (v 1.4.1)
 
-The idea is that you have certain sized blocks, in the general case one is 3 cm and the other is 4.5 cm. The idea is to build a wall of various widths and heights using these blocks. When stacking, blocks must overlap any "seams" in the layer below. 
+The idea is that you have certain sized blocks, in the general case one is 3 cm and the other is 4.5 cm, for which you want to build a wall of various widths and heights using these blocks. When stacking, blocks must overlap all  "seams" that appear in the layer below. 
 
 ####Running
 
-There are no build instructions. I simply ran it in my native Mac Python, which happens to be 2.7.10. Sure, I could have set up a separate environment at a different version, but that seemed needlessly complicated.
+There are no build instructions. Simply run on CLI; confirmed compatible with Python 2.7 and Python 3.6. 
 
 I've provided a run.py which will take width and height params (defaults to 27x5), like:
 ```run.py 48 10```

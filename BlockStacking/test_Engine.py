@@ -8,7 +8,7 @@ from time import gmtime, strftime
 class Test_Engine(unittest.TestCase):
 	
 	def test_BuildWalls(self):
-		print ''
+		print('')
 		tests = [
 			{'name': 'Build 7.5 x 0', 'width': 7.5, 'height': 0,  'expected': 0},
 			{'name': 'Build 7.5 x 1', 'width': 7.5, 'height': 1,  'expected': 2},
@@ -28,7 +28,7 @@ class Test_Engine(unittest.TestCase):
 			engine.buildBlocks(3, 4.5)
 			engine.buildLayers(test['width'])
 			actual = engine.countWalls(test['height'])
-			print "Testing: {} ==> {}".format(test['name'], actual)
+			print("Testing: {} ==> {}".format(test['name'], actual))
 
 			self.assertEqual(actual, test['expected'],
 				"{}: Got: {}, Expected: {}".format(
@@ -36,7 +36,7 @@ class Test_Engine(unittest.TestCase):
 			
 			ended = datetime.now()
 			duration = ended - started
-			print "Ran in: ~ {}.{} seconds".format(duration.seconds, duration.microseconds)
+			print("Ran in: ~ {}.{} seconds".format(duration.seconds, duration.microseconds))
 
 if __name__ == '__main__':
 	unittest.main(verbosity=2)

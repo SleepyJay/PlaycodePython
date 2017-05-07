@@ -5,7 +5,7 @@ from datetime import datetime
 import sys
 
 started = datetime.now()
-print "Started: {}".format(datetime.ctime(started))
+print("Started: {}".format(datetime.ctime(started)))
 
 
 target_width = 27
@@ -18,12 +18,12 @@ if len(sys.argv) > 1:
 engine = Engine()
 
 engine.buildBlocks(3, 4.5)
-print "Blocks built: {}\n".format(len(engine.blocks))
+print("Blocks built: {}\n".format(len(engine.blocks)))
 
 engine.buildLayers(target_width)
-print "Layers built: {}".format(len(engine.layers))
+print("Layers built: {}".format(len(engine.layers)))
 layers_duration = datetime.now() - started
-print "Layers Finished after: ~ {}.{} seconds.\n".format(layers_duration.seconds, layers_duration.microseconds)
+print("Layers Finished after: ~ {}.{} seconds.\n".format(layers_duration.seconds, layers_duration.microseconds))
 
 ## This actually builds the walls, which could be interesting for debugging
 ## However, it is too slow to do this way, starting around 48x2 (?)
@@ -32,7 +32,7 @@ print "Layers Finished after: ~ {}.{} seconds.\n".format(layers_duration.seconds
 #     print "W: {}".format(wall)
 
 count = engine.countWalls(target_height)
-print "Walls found: {}".format(count)
+print("Walls found: {}".format(count))
 walls_duration = datetime.now() - started
-print "Walls Finished after: ~ {}.{} seconds.\n".format(walls_duration.seconds, walls_duration.microseconds)
+print("Walls Finished after: ~ {}.{} seconds.\n".format(walls_duration.seconds, walls_duration.microseconds))
 
