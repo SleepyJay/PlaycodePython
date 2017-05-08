@@ -1,4 +1,6 @@
-# PlaycodePython.NameDistro v 1.0
+# PlaycodePython.NameDistro v1.0.1
+
+Runs with Python 3.6.
 
 Just a really simple program to distribute an ordered collection into N buckets. 
 
