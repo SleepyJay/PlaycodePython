@@ -50,6 +50,26 @@ class Test_CronEntry(unittest.TestCase):
             self.assertEqual(actual, test.expected,
                 "{}: {} ==> {}".format(test.name, actual, test.expected))
 
+        for test in self.test_hour_data:
+            actual = self.cron_entry.parseHours(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
+        for test in self.test_month_day_data:
+            actual = self.cron_entry.parseMinutes(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
+        for test in self.test_minute_data:
+            actual = self.cron_entry.parseMinutes(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
+        for test in self.test_minute_data:
+            actual = self.cron_entry.parseMinutes(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
 
 
 
