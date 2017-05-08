@@ -1,4 +1,6 @@
-# PlaycodePython.GridMenu
+# PlaycodePython.GridMenu v0.5.0
+
+Runs with Python 3.6.
 
 A job interview asked some approximation of this question.
 

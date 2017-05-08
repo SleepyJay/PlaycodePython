@@ -20,7 +20,7 @@ class GridMenu(object):
 		self.alphabet = alphabet
 		self.last = len(alphabet)-1
 		
-		rows = self.last / self.cols
+		rows = int(self.last / self.cols)
 		if self.last % self.cols:
 			rows += 1
 		
@@ -99,7 +99,7 @@ class GridMenu(object):
 		return self.position
 	
 	def setPosition(self, pos):
-		self.position = pos
+		self.position = int(pos)
 	
 	def getString(self):
 		return self.string
@@ -128,7 +128,7 @@ class GridMenu(object):
 	
 	def log_debug(self, message):
 		if DEBUG:
-			print message
+			print(message)
 	
 
 

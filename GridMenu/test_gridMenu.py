@@ -28,7 +28,7 @@ class Test_GridMenu(unittest.TestCase):
 			actual = grid.moveMany(test['moves'])
 			message = "Testing Moves: {} => {} ? {}".format(test['moves'], test['expected'], actual)
 			self.assertEqual(actual, test['expected'], message)
-			print message
+			print(message)
 			
 			grid.clear()
 			
