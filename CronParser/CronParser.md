@@ -1,6 +1,6 @@
-# PlaycodePython.CronParser v0.7.1
+# PlaycodePython.CronParser v0.7.2
 
-Parse a crontab and ask it questions. 
+Parse a crontab and ask it questions. This version only runs in Python 3 (3.6).
 
 
 Should be able to parse a cron from the scheduling standpoint. 

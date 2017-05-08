@@ -13,7 +13,7 @@ class Test_CronEntry(unittest.TestCase):
 
     #
     def setup(self):
-        print ""
+        print("")
 
         cron_parser = CronParser()
         self.cron_entry = CronEntry(cron_parser.Schedule('*','*','*','*','*'),'#')

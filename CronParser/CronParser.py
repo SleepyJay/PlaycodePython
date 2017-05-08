@@ -38,7 +38,7 @@ class CronParser(object):
         m = self.re_cron_line.match(line)
         if m:
             sched = self.toScheduleTuple(m.group(1))
-            print "cron: {} ==> {}".format(m.group(1,3), sched)
+            print("cron: {} ==> {}".format(m.group(1,3), sched))
             entry = CronEntry(sched, m.group(3))
             self.parsed_entries.append(entry)
             return LineType.cron
