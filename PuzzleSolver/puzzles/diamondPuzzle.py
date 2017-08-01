@@ -1,11 +1,11 @@
 # Diamond Puzzle
 
-from puzzle import Puzzle
+from Puzzle import Puzzle
 
 # Constants for named-board positions, "YT" is "yellow-top", etc.
 (YT, BL, BR, YB, RL, RR, PT, GL, GR, PB) = range(10)
 
-__package__ = "puzzles.DiamondPuzzle"
+__package__ = "Puzzles.DiamondPuzzle"
 
 class DiamondPuzzle(Puzzle):
 	

@@ -51,7 +51,7 @@ class Puzzle(object):
 		self.currentState = []
 		
 	def toIntList(self, str_):
-		return map(lambda x: int(x), list(str_)) 
+		return [int(x) for x in list(str_)]
 
 	#
 	def getRange(self):
