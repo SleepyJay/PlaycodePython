@@ -2,7 +2,7 @@
 
 # Unit tests
 
-from puzzles.DiamondPuzzle import DiamondPuzzle
+from Puzzles.DiamondPuzzle import DiamondPuzzle
 import unittest
 
 dp = DiamondPuzzle(starting_point = '1010010101', goal = '1100100011')
@@ -58,7 +58,7 @@ class Test_DiamondPuzzle(unittest.TestCase):
 		dp.solveAttempts = 0
 		best = sorted(dp.solveShortest(1))
 		self.isBoardSolved(best)
-		print "Best ({}): {}".format(dp.solveAttempts, best)
+		print("Best ({}): {}".format(dp.solveAttempts, best))
 		
 		
 		# TEST: pruning
@@ -78,7 +78,7 @@ class Test_DiamondPuzzle(unittest.TestCase):
 		ok = dp.confirmSolution(solution)
 		ok_str = ("PASS" if ok else "FAIL")
 		curr = dp.getBoardState()
-		print "Solved: {} == {} : {}".format(curr, dp.goal, ok_str)	
+		print("Solved: {} == {} : {}".format(curr, dp.goal, ok_str))
 
 
 if __name__ == '__main__':

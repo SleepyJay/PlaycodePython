@@ -21,31 +21,31 @@ class CronEntry(object):
     def parseMinutes(self, min_str):
         if min_str == '*':
             return min_str
-        return map( (lambda x: int(x)), min_str.split(',') )
+        return [int(x) for x in min_str.split(',')]
 
     #
     def parseHours(self, hour_str):
         if hour_str == '*':
             return hour_str
-        return map( (lambda x: int(x)), hour_str.split(',') )
+        return [int(x) for x in hour_str.split(',')]
 
     #
     def parseMonthDays(self, day_str):
         if day_str == '*':
             return day_str
-        return map( (lambda x: int(x)), day_str.split(',') )
+        return [int(x) for x in day_str.split(',')]
 
     #
     def parseMonths(self, month_str):
         if month_str == '*':
             return month_str
-        return map( (lambda x: int(x)), month_str.split(',') )
+        return [int(x) for x in month_str.split(',')]
 
     #
     def parseWeekDays(self, day_str):
         if day_str == '*':
             return day_str
-        return map( (lambda x: int(x)), day_str.split(',') )
+        return [int(x) for x in day_str.split(',')]
 
 
 

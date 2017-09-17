@@ -13,7 +13,7 @@ class Test_CronEntry(unittest.TestCase):
 
     #
     def setup(self):
-        print ""
+        print("")
 
         cron_parser = CronParser()
         self.cron_entry = CronEntry(cron_parser.Schedule('*','*','*','*','*'),'#')
@@ -44,6 +44,26 @@ class Test_CronEntry(unittest.TestCase):
     # This is just to test the split mechanism
     def test_ParseMinutes(self):
         self.setup()
+
+        for test in self.test_minute_data:
+            actual = self.cron_entry.parseMinutes(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
+        for test in self.test_hour_data:
+            actual = self.cron_entry.parseHours(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
+        for test in self.test_month_day_data:
+            actual = self.cron_entry.parseMinutes(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
+
+        for test in self.test_minute_data:
+            actual = self.cron_entry.parseMinutes(test.value)
+            self.assertEqual(actual, test.expected,
+                "{}: {} ==> {}".format(test.name, actual, test.expected))
 
         for test in self.test_minute_data:
             actual = self.cron_entry.parseMinutes(test.value)

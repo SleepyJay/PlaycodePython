@@ -16,7 +16,7 @@ for data in nd.group_data:
 		print("{} passed to {} has spread of: {}".format(
 			data.name, func.name, spread
 		))
-	print "\n"
+	print("\n")
 
 
 

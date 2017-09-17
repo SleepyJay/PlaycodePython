@@ -11,7 +11,7 @@ grid = GridMenu(6,alphabet)
 
 grid.clear()
 grid.move('D')
-print grid.getPosition()
+print(grid.getPosition())
 
 
 # print grid.moveMany(['E']) ; grid.clear()

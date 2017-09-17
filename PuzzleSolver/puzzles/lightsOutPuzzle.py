@@ -1,9 +1,9 @@
 # LightsOut Puzzle
 
 import math
-from puzzle import Puzzle
+from Puzzle import Puzzle
 
-__package__ = "puzzles.lighstOutPuzzle"
+__package__ = "Puzzles.LighstOutPuzzle"
 
 class LightsOutPuzzle(Puzzle):
 	

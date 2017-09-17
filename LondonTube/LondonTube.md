@@ -1,4 +1,6 @@
-# LondonTube Solver
+# PlayPython.LondonTube v0.5.0
+
+Runs with Python 3.6.
 
 This was from an interview question. 
 

@@ -2,7 +2,7 @@
 
 # Unit tests
 
-from puzzles.lightsOutPuzzle import LightsOutPuzzle
+from Puzzles.LightsOutPuzzle import LightsOutPuzzle
 import unittest
 
 dp = LightsOutPuzzle(starting_point = '1010010101', goal = '1100100011')

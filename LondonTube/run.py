@@ -10,9 +10,9 @@ found = tubeDir.findJourneys('East Ham', STOPS_AWAY)
 
 for nodeName in sorted(found):
     journey = found[nodeName]
-    print '{} (lines = {})'.format(journey.furthest(), str(", ".join(journey.lines)))
+    print(f'{journey.furthest()} (lines = {str(", ".join(journey.lines))})')
 
-print "----------------"
+print("----------------")
 
 tubeNonDir = LondonTube()
 tubeNonDir.setDirected(0)
@@ -21,7 +21,7 @@ found = tubeNonDir.findJourneys('East Ham', STOPS_AWAY)
 
 for nodeName in sorted(found):
     journey = found[nodeName]
-    print '{} (lines = {})'.format(journey.furthest(), str(", ".join(journey.lines)))
+    print(f'{journey.furthest()} (lines = {str(", ".join(journey.lines))})')
 
 
     

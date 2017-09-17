@@ -16,7 +16,7 @@ class Test_NameDistro(unittest.TestCase):
 		#print "\n"
 		
 		for test in nd.group_data:
-			print "\n"
+			print("\n")
 			for func in funcs:
 				total = 0
 				count = 0
