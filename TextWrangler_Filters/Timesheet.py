@@ -4,8 +4,6 @@ import fileinput
 import re
 import collections
 
-Entry = collections.namedtuple('Entry', ['name', 'time'])
-
 sheet = dict()
 
 for thing in sorted(fileinput.input()):
@@ -15,10 +13,16 @@ for thing in sorted(fileinput.input()):
         continue
 
     tix = line.split('\t')
-    tot = float(tix.pop())
+    tot = tix.pop()
+    if not tot or tot == '0.00':
+        continue
+
+    tot = float(tot)
     rem = tix.pop()
 
     for t in tix:
+        t.strip()
+
         if t == '':
             continue
 
@@ -32,7 +36,9 @@ for thing in sorted(fileinput.input()):
         sheet[rem] = 0
     sheet[rem] += tot
 
-
+total = 0
 for key in sheet:
+    total += sheet[key]
     print( key + '\t' + str(sheet[key]) )
 
+print("\ntotal: {}".format(total))
