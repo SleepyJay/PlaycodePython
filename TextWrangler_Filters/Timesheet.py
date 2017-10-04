@@ -2,7 +2,6 @@
 
 import fileinput
 import re
-import collections
 import datetime
 
 sheet = dict()
@@ -10,31 +9,32 @@ sheet = dict()
 for thing in sorted(fileinput.input()):
     line = re.sub("\n", "", thing)
 
-    if line == '':
-        continue
+    if not line: continue
 
     tix = line.split('\t')
-    tot = tix.pop()
-    if not tot or tot == '0.00':
-        continue
 
+    # Do not convert to float until '0.00', spaces, and '' are sorted out
+    tot = tix.pop()
+    tot = re.sub(" ", "", tot)
+
+    if not tot: continue
     tot = float(tot)
+
+    # Do not keep 0 duration tasks around
+    if not tot: continue
+
+    # Task for which to apply remaing time
     rem = tix.pop()
 
     for t in tix:
         t.strip()
-
-        if t == '':
-            continue
-
-        if not t in sheet:
-            sheet[t] = 0
+        if not t: continue
+        if not t in sheet: sheet[t] = 0
 
         sheet[t] += .25
-        tot -= .25
+        tot      -= .25
 
-    if not rem in sheet:
-        sheet[rem] = 0
+    if not rem in sheet: sheet[rem] = 0
     sheet[rem] += tot
 
 total = 0
