@@ -3,6 +3,7 @@
 import fileinput
 import re
 import collections
+import datetime
 
 sheet = dict()
 
@@ -37,8 +38,13 @@ for thing in sorted(fileinput.input()):
     sheet[rem] += tot
 
 total = 0
+tm_start = datetime.timedelta(hours=9)
+tm_end   = tm_start
+
 for key in sheet:
     total += sheet[key]
-    print( key + '\t' + str(sheet[key]) )
+    tm_end = tm_start + datetime.timedelta(hours=sheet[key])
+    print( "{}\t{}\t{}-{}".format(key, sheet[key], tm_start, tm_end) )
+    tm_start = tm_end
 
 print("\ntotal: {}".format(total))
