@@ -4,8 +4,10 @@ import re
 import collections
 from CronEntry import CronEntry
 
+
 class LineType:
     cron, comment, empty = range(3)
+
 
 class CronParser(object):
 
@@ -21,20 +23,20 @@ class CronParser(object):
         self.parsed_entries = []
 
     #
-    def parseLines(self, lines):
+    def parse_lines(self, lines):
         for i in range(len(lines)):
-            self.lexLine(lines[i], i)
+            self.lex_line(lines[i], i)
         return self.parsed_entries
 
     #
-    def lexLine(self, line, lno):
+    def lex_line(self, line, lno):
         line = line.rstrip()
 
         m = self.re_cron_line.match(line)
         if m:
-            sched = self.toScheduleTuple(m.group(1))
-            print("cron: {} ==> {}".format(m.group(1,3), sched))
-            entry = CronEntry(sched, m.group(3))
+            schedule = self.to_schedule_tuple(m.group(1))
+            print("cron: {} ==> {}".format(m.group(1,3), schedule))
+            entry = CronEntry(schedule, m.group(3))
             self.parsed_entries.append(entry)
             return LineType.cron
 
@@ -46,19 +48,18 @@ class CronParser(object):
             return None
 
     #
-    def parseFile(self, file_path):
+    def parse_file(self, file_path):
         f = open(file_path, 'r')
 
         if not f:
             # Exception?
             pass
         
-        lines = map( (lambda x: x.rstrip()), f.readlines())
-        return self.parseLines(lines)
-
+        lines = map((lambda x: x.rstrip()), f.readlines())
+        return self.parse_lines(lines)
 
     # 
-    def toScheduleTuple(self, sched_str):
+    def to_schedule_tuple(self, schedule_str):
         # Possibly not all quite this simple, :)
-        return self.Schedule( *(sched_str.split()) )
+        return self.Schedule( *(schedule_str.split()) )
 

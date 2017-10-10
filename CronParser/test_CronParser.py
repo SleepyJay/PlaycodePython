@@ -47,7 +47,7 @@ class Test_CronParser(unittest.TestCase):
     def test_Schedule(self):
         self.setup()
         for test in self.test_schedule_data:
-            sched = self.cron_parser.toScheduleTuple(test.sched_str)
+            sched = self.cron_parser.to_schedule_tuple(test.sched_str)
             self.assertEqual(sched, test.expected,
                 "Schedule ({}) parsed ok ({})".format(sched, test.expected))
 
@@ -58,7 +58,7 @@ class Test_CronParser(unittest.TestCase):
         i = 0
         for test in self.test_line_data:
             i += 1
-            type = self.cron_parser.lexLine(test.line, i)
+            type = self.cron_parser.lex_line(test.line, i)
             self.assertEqual(type, test.expected,
                 "Line ({}) parsed ok ({})".format(test.line, type))
                 
@@ -70,7 +70,7 @@ class Test_CronParser(unittest.TestCase):
         for test in self.test_line_data:
             lines.append(test.line)
 
-        parsed_list = self.cron_parser.parseLines(lines)
+        parsed_list = self.cron_parser.parse_lines(lines)
         list_count = len(parsed_list)
         self.assertEqual(list_count, self.expected_test_data_cron_count,
             "ParsedLines resulted in {} crons".format(list_count))
@@ -79,7 +79,7 @@ class Test_CronParser(unittest.TestCase):
     #
     def test_ParseFile(self):
         self.setup()
-        parsed_list = self.cron_parser.parseFile('./crontab_test')
+        parsed_list = self.cron_parser.parse_file('./crontab_test')
         
         list_count = len(parsed_list)
         self.assertEqual(list_count, self.expected_test_file_cron_count,
