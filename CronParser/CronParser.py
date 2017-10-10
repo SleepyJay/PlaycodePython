@@ -23,16 +23,11 @@ class CronParser(object):
     #
     def parseLines(self, lines):
         for i in range(len(lines)):
-            line = lines[i]
-            parsed_line = self.lexLine(line, i)
-            #print "{} ==> {}".format(line, parsed_line)
-
+            self.lexLine(lines[i], i)
         return self.parsed_entries
-
 
     #
     def lexLine(self, line, lno):
-        #print "{}: {}".format(lno, line)
         line = line.rstrip()
 
         m = self.re_cron_line.match(line)

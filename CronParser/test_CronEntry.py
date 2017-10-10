@@ -71,8 +71,6 @@ class Test_CronEntry(unittest.TestCase):
                 "{}: {} ==> {}".format(test.name, actual, test.expected))
 
 
-
-
 if __name__ == '__main__':
 	unittest.main(verbosity=2)
 

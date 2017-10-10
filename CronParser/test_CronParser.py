@@ -12,7 +12,7 @@ class Test_CronParser(unittest.TestCase):
 
     #
     def setup(self):
-        print ""
+        print()
 
         self.cron_parser = CronParser()
         self.TestLine = collections.namedtuple( 'TestLine',
