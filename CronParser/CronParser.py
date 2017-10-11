@@ -55,7 +55,7 @@ class CronParser(object):
             # Exception?
             pass
         
-        lines = map((lambda x: x.rstrip()), f.readlines())
+        lines = list(map((lambda x: x.rstrip()), f.readlines()))
         return self.parse_lines(lines)
 
     # 
