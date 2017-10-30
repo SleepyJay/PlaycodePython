@@ -10,7 +10,6 @@ These should all be Python 3 compatible. (But see individual projects.)
 
 * **BlockStacking**: Stack blocks (mathmatically) using certain sizes and conditions, for efficient run times using large data sets.
 * **CronParser**: Parse a crontab and ask it questions. 
-* **FoodXP**: Sort of a silly 3-variable optimization/trade-off experiment (video game inspired).
 * **GridMenu**: Generic wrap-around navigation of a 2D array of symbols (mathmatically).
 * **LondonTube**: Finding routes along the London Tube map (mathmatically).
 * **NameDistro**: Quick and dirty packing problem for people names. 
