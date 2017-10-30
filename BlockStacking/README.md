@@ -6,6 +6,8 @@ The idea is that you have certain sized blocks, in the general case one is 3 cm 
 
 There are no build instructions. Simply run on CLI; confirmed compatible with Python 2.7 and Python 3.6. 
 
+Probably want to run the test_Engine.py.
+
 I've provided a run.py which will take width and height params (defaults to 27x5), like:
 ```run.py 48 10```
 

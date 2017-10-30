@@ -43,7 +43,7 @@ class LondonTube():
                     self.addForDirected(from_node, to_node, tube_line)
                 else:
                     self.addForUndirected(from_node, to_node, tube_line)
-    
+        f.close()
     
     def addForDirected(self, from_node, to_node, tube_line):
         if from_node not in self.edges:

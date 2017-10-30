@@ -1,4 +1,4 @@
-# PlaycodePython v2.0.1
+# PlaycodePython v2.1.0
 
 ## Musings in Python 
 

@@ -4,7 +4,7 @@
 
 import unittest
 import collections
-from CronParser import CronParser, LineType
+from CronParser import CronParser
 from CronEntry import CronEntry
 
 
