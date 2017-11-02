@@ -108,6 +108,9 @@ class GameBoard(object):
         ending = ' '
         if pretty:
             ending = "\n"
+        r = 1
+        if pretty:
+            board_str += " |".join(range(0,self.size))
         for row in self.grid:
             vals = []
             for val in row:
@@ -121,7 +124,8 @@ class GameBoard(object):
                         vals.append('H0')
                 else:
                     vals.append(val)
-
+            if pretty:
+                board_str += str(r) + " |"
             board_str += ' '.join(vals) + ending
 
         return board_str
