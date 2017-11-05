@@ -1,5 +1,12 @@
 # BattleBoat - Design Notes.
 
+## TODO
+1. django: POST vs GET
+2. django: get POST content
+3. django: templates
+4. views: render foo-output
+5. GameBoard: fix loading-state for no-spaces
+
 ## Assets
 
 ### Game

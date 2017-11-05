@@ -11,7 +11,7 @@ class Database(object):
         pass
 
     #
-    def join_game(self, player, game_id=None):
+    def join_game(self, player, game_id):
         # if not game_id: ERROR
         # game_id := select * from game_table where id = game_id;
         # if not exists game_id: ERROR

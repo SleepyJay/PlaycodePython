@@ -1,6 +1,6 @@
 
 import unittest
-from GameBoard import GameBoard
+from battleboat.GameBoard import GameBoard
 
 
 class Test_GameBoard(unittest.TestCase):
@@ -16,8 +16,21 @@ class Test_GameBoard(unittest.TestCase):
 
     #
     def test_create_board(self):
-        gb = GameBoard()
-        gb.create_board("0A1 0A1 0A1")
+        size = 10
+        gb = GameBoard(size)
+
+        player_expected = ''.join( ['U0' for i in range(0,100)] )
+        self.assertEquals(player_expected, gb.to_player_repr(),
+            'Created open player grid')
+
+        opponent_expected = ''.join( ['U_' for i in range(0,100)] )
+        self.assertEquals(opponent_expected, gb.to_opponent_repr(),
+            'Created open opponent grid')
+
+        # TODO: make this a better test than just "do not error"
+        positions = gb.load_board(size, player_expected)
+        print(positions)
+
 
 if __name__ == '__main__':
 	unittest.main(verbosity=2)

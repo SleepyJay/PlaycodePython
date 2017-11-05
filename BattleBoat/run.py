@@ -1,5 +1,5 @@
 
-from GameBoard import GameBoard
+from battleboat.GameBoard import GameBoard
 
 gb = GameBoard()
 
