@@ -14,6 +14,7 @@
 #   H1 => H0 only if not destroyed
 
 import re
+from collections import namedtuple
 
 class GameBoard(object):
     #
@@ -21,7 +22,8 @@ class GameBoard(object):
         self.size = size
         self.grid = []
         self.re_cell = re.compile('(\w)(\w+)')
-
+        self.re_board = re.compile('([A-Z][\d_]+)')
+#re.split('([A-Z][\d_]+)', stuff)[1::2]
         if grid_string:
             self.load_board(size, grid_string)
         else:
@@ -34,7 +36,7 @@ class GameBoard(object):
     #
     def load_board(self, size, grid_serial_string):
         # TODO: load from given string
-        positions = grid_serial_string.split(" ")
+        positions = re.split(self.re_board, grid_serial_string)[1::2]
         print(positions)
         pass
 
@@ -43,7 +45,7 @@ class GameBoard(object):
         if horizontal:
             if x + size > self.size:
                 # TODO: Exception?
-                print("OOPS! Won't fix!")
+                print("OOPS! Won't fit!")
                 return
             for n in range(0, size):
                 self.place_cell(x + n, y, 'U' + str(id))
@@ -51,7 +53,7 @@ class GameBoard(object):
         else:
             if y + size > self.size:
                 # TODO: Exception?
-                print("OOPS! Won't fix!")
+                print("OOPS! Won't fit!")
                 return
             for n in range(0, size):
                 self.place_cell(x, y + n , 'U' + str(id))
@@ -92,26 +94,42 @@ class GameBoard(object):
         return 0
 
     #
-    def to_player_repr(self, pretty=False):
+    def orig_to_player_repr(self, pretty=False):
         board_str = ''
-        ending = ' '
+        ending = ''
+        joiner = ''
+        i = 0
         if pretty:
             ending = "\n"
+            joiner = ' '
+            board_str += self.get_pretty_header()
+
         for row in self.grid:
-            board_str += ' '.join(row) + ending
+            i += 1
+            if pretty:
+                board_str += self.get_pretty_prefix(i)
+
+            board_str += joiner.join(row) + ending
 
         return board_str
 
     #
-    def to_opponent_repr(self, pretty=False):
+    def orig_to_opponent_repr(self, pretty=False):
         board_str = ''
-        ending = ' '
+        ending = ''
+        joiner = ''
+        i = 0
         if pretty:
             ending = "\n"
-        r = 1
-        if pretty:
-            board_str += " |".join(range(0,self.size))
+            joiner = ' '
+            board_str += self.get_pretty_header()
+
         for row in self.grid:
+            i += 1
+            if pretty:
+                board_str += self.get_pretty_prefix(i)
+
+
             vals = []
             for val in row:
                 if val.startswith('U'):
@@ -124,9 +142,67 @@ class GameBoard(object):
                         vals.append('H0')
                 else:
                     vals.append(val)
-            if pretty:
-                board_str += str(r) + " |"
-            board_str += ' '.join(vals) + ending
+
+
+            board_str += joiner.join(vals) + ending
 
         return board_str
 
+    #
+    def to_player_repr(self, pretty=False):
+        return self.to_board_repr(self._func_player_repr, pretty)
+
+    #
+    def to_opponent_repr(self, pretty=False):
+        return self.to_board_repr(self._func_opponent_repr, pretty)
+        pass
+
+    #
+    def _func_opponent_repr(self, row):
+        vals = []
+        for val in row:
+            if val.startswith('U'):
+                vals.append('U_')
+            elif val.startswith('H'):
+                code, id = self.split_cell(val)
+                if self.is_ship_destroyed(id):
+                    vals.append(val)
+                else:
+                    vals.append('H0')
+            else:
+                vals.append(val)
+
+        return vals
+
+    # This doesn't really do much, does it, now?
+    def _func_player_repr(self, row, pretty=False):
+        return row
+
+    #
+    def to_board_repr(self, repr_func, pretty=False):
+        board_str = ''
+        ending = ''
+        joiner = ''
+        i = 0
+        if pretty:
+            ending = "\n"
+            joiner = ' '
+            board_str += self.get_pretty_header()
+
+        for row in self.grid:
+            i += 1
+            if pretty:
+                board_str += self.get_pretty_prefix(i)
+
+            vals = repr_func(row)
+
+            board_str += joiner.join(vals) + ending
+        return board_str
+
+    #
+    def get_pretty_header(self):
+        return "\t|" + " |".join([str(x) for x in list(range(1, self.size + 1))]) + "\n"
+
+    #
+    def get_pretty_prefix(self, i):
+        return str(i) + "\t|"

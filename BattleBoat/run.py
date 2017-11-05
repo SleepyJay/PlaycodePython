@@ -24,5 +24,11 @@ gb.attack_cell(10,3)
 gb.attack_cell(4,8)
 gb.attack_cell(5,7)
 
+print(gb.orig_to_player_repr(True))
+print(gb.orig_to_opponent_repr(True))
+
 print(gb.to_player_repr(True))
 print(gb.to_opponent_repr(True))
+
+print(gb.to_player_repr())
+print(gb.to_opponent_repr())
