@@ -94,61 +94,6 @@ class GameBoard(object):
         return 0
 
     #
-    def orig_to_player_repr(self, pretty=False):
-        board_str = ''
-        ending = ''
-        joiner = ''
-        i = 0
-        if pretty:
-            ending = "\n"
-            joiner = ' '
-            board_str += self.get_pretty_header()
-
-        for row in self.grid:
-            i += 1
-            if pretty:
-                board_str += self.get_pretty_prefix(i)
-
-            board_str += joiner.join(row) + ending
-
-        return board_str
-
-    #
-    def orig_to_opponent_repr(self, pretty=False):
-        board_str = ''
-        ending = ''
-        joiner = ''
-        i = 0
-        if pretty:
-            ending = "\n"
-            joiner = ' '
-            board_str += self.get_pretty_header()
-
-        for row in self.grid:
-            i += 1
-            if pretty:
-                board_str += self.get_pretty_prefix(i)
-
-
-            vals = []
-            for val in row:
-                if val.startswith('U'):
-                    vals.append('U_')
-                elif val.startswith('H'):
-                    code, id = self.split_cell(val)
-                    if self.is_ship_destroyed(id):
-                        vals.append(val)
-                    else:
-                        vals.append('H0')
-                else:
-                    vals.append(val)
-
-
-            board_str += joiner.join(vals) + ending
-
-        return board_str
-
-    #
     def to_player_repr(self, pretty=False):
         return self.to_board_repr(self._func_player_repr, pretty)
 
