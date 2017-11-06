@@ -1,4 +1,12 @@
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.contrib import admin
+admin.autodiscover()
 
 from . import views
 
@@ -28,4 +36,6 @@ urlpatterns = [
 
     #url(r'new_game', views.new_game, name='new_game'),
     #url(r'join_game', views.join_game, name='join_game'),
-]
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
