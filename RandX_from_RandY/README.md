@@ -3,10 +3,12 @@
 ## Current Version (WIP)
 Given any two numbers, `x` and `y` you should be able to get a random distribution between 1 and `x` by using a function `randY()` (which gives integers between 1 and Y). 
 
-If the numbers are equal, it’s obviously trivial. 
+It's out of scope of this exercise to go too far working out proofs. I present a few easy solutions here:
 
-1. If `x` is a multiple of `y`, you can partition the values using a simple mod. For instance, `rand2()` from `rand4()`, so [1,2,3,4] can easily be partitioned into [1,2].
-2. If `x` is smaller than`y`, you can rely on rerolling if the number chosen is larger than `x` (also works if multiple `x`’s can fit in `y`unevenly). It’s like pretending the first case, but ignoring rolls that are too big. For instance, `rand2()` from `rand5()`, so [1,2,3,4], ignore 5, and partition like case 1. This can, obviously, lead to a 
+0. If the numbers are equal, it’s obviously trivial. 
+
+1. If `x` is a multiple of `y`, we partition the values using a simple mod. For instance, `rand2()` from `rand4()`, so [1,2,3,4] can easily be partitioned into [1,2].
+2. If `x` is smaller than`y`, we reroll while the number chosen is larger than `x` (also works if multiple `x`’s can fit in `y` unevenly). For instance, `rand2()` from `rand5()`, so [1,2,3,4], ignore 5, and partition to [1, 2] like case 1. This can, obviously, lead to a situation where you could never return a answer. 
 3. If `x` is larger than`y`, you can 
 
 
