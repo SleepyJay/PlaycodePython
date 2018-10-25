@@ -4,6 +4,7 @@ import random
 
 __package__ = "puzzle"
 
+
 class Puzzle(object):
 	
 	def __init__(self, starting_point = None, goal = None):
