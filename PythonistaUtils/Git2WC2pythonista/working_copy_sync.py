@@ -13,6 +13,7 @@ class WorkingCopySync(object):
         self.contoller_script = controller
         self.ParsedPath = namedtuple("ParsedPath", ["full", "doc_root", "base_dir", "local_dir", "file"] )
         self.repo = repo or self.guess_repo()
+        self.re_path = 
 
     #
     def sync_to_repo(self, file_path=None, askcommit=0, overwrite=1):
