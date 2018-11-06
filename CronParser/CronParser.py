@@ -56,6 +56,8 @@ class CronParser(object):
             pass
         
         lines = list(map((lambda x: x.rstrip()), f.readlines()))
+
+        f.close()
         return self.parse_lines(lines)
 
     # 
