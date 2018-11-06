@@ -4,8 +4,9 @@ from Block import Block
 from Layer import Layer
 from Wall import Wall
 
+
 class Engine(object):
-    '''A class to build Walls.'''
+    """A class to build Walls."""
 
     #
     def __init__(self):
@@ -15,14 +16,14 @@ class Engine(object):
         self.current_width = 0
 
     #
-    def buildBlocks(self, *sizes):
+    def build_blocks(self, *sizes):
         # When building blocks, reset cached width
         self.current_width = 0
         for sz in sizes:
             self.blocks.append(Block(sz))
 
     #
-    def buildLayers(self, width):
+    def build_layers(self, width):
         # Don't rebuild layers if called again with same width
         if self.current_width == width:
             return
@@ -56,24 +57,24 @@ class Engine(object):
         self.layers = final
         self.current_width = width
         
-        self.preCacheLayers()
+        self.precache_layers()
 
 
     #
-    def preCacheLayers(self):
+    def precache_layers(self):
         layer_len = len(self.layers)
         for i in range(layer_len):
             layer = self.layers[i]
             for j in range(i, layer_len):
                 under = self.layers[j]
-                stackable = under.checkCanStack(layer)
+                stackable = under.check_can_stack(layer)
 
                 if stackable:
                     under.can_be_stacked.add(layer)
                     layer.can_be_stacked.add(under)
 
     #
-    def buildWalls(self, height):
+    def build_walls(self, height):
         queue = []
         final = []
 
@@ -103,7 +104,7 @@ class Engine(object):
         self.walls = final
 
     #
-    def countWalls(self, height):
+    def count_walls(self, height):
         if height <= 0:
             return 0
 
@@ -132,7 +133,7 @@ class Engine(object):
         return total
 
     #
-    def wallCount(self):
+    def wall_count(self):
         return len(self.walls)
 
 
@@ -141,8 +142,3 @@ class Engine(object):
         return str(self.__dict__)
 
     #
-    
-
-
-
-

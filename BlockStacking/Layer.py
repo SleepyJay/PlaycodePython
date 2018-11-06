@@ -2,7 +2,7 @@
 
 
 class Layer(object):
-    '''A class representing a Layer, a collection of Blocks'''
+    """A class representing a Layer, a collection of Blocks"""
     
     #
     def __init__(self, blocks=[]):
@@ -14,7 +14,7 @@ class Layer(object):
         self.levels = {}
         self.width_set = set()
         
-        self.addMany(blocks)
+        self.add_many(blocks)
 
     #
     def add(self, block):
@@ -23,12 +23,12 @@ class Layer(object):
         self.width_set.add(self.width)
 
     #
-    def addMany(self, blocks):
+    def add_many(self, blocks):
         for block in blocks:
             self.add(block)
 
     #
-    def checkCanStack(self, layer):
+    def check_can_stack(self, layer):
         for w in self.width_set:
             if self.width == w:
                 continue

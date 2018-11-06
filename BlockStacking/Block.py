@@ -2,7 +2,7 @@
 
 
 class Block(object):
-    '''A class representing a Block, which has a size'''
+    """A class representing a Block, which has a size"""
     
     #
     def __init__(self, size):
@@ -11,7 +11,3 @@ class Block(object):
     #
     def __repr__(self):
         return str(self.size)
-
-
-
-    
