@@ -24,7 +24,7 @@ class Test_GridMenu(unittest.TestCase):
 		]
 		
 		for test in tests:
-			actual = grid.moveMany(test['moves'])
+			actual = grid.move_many(test['moves'])
 			message = "Testing Moves: {} => {} ? {}".format(test['moves'], test['expected'], actual)
 			self.assertEqual(actual, test['expected'], message)
 			print(message)
