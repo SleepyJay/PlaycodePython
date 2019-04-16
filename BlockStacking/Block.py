@@ -1,4 +1,5 @@
-#!/usr/bin/python
+
+# Sooo sparse, I know. I would have used a namedtuple, but made it a class for the __repr__
 
 
 class Block(object):

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from Engine import Engine
+from BlockStacking.Engine import Engine
 from datetime import datetime
 import sys
 
@@ -15,8 +15,20 @@ target_width = 42
 target_height = 4
 width_small = 3
 width_large = 4.5
+
+# If `print_walls` is True, you will get walls. A LOT of output, like ~900,000 walls!
+# They would look something like this
+# (you can sorta see the overlaping principle, even just with numbers):
+# W: [
+# [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+# [4.5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4.5],
+# [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+# [4.5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4.5]
+# ]
 print_walls = False
 
+# This turns on printing of one stacked wall
+print_one_wall = True
 
 if len(sys.argv) > 1:
     target_width = float(sys.argv[1])
@@ -38,9 +50,14 @@ count = len(engine.walls)
 print("Walls built: {}".format(count))
 print("Walls building took: ~ {}.{} seconds.\n".format(walls_duration.seconds, walls_duration.microseconds))
 
-for wall in engine.walls:
-    # Change to True for wall-printing
-    if print_walls:
+if print_walls:
+    for wall in engine.walls:
         print("W: {}".format(wall))
 
+if print_one_wall:
+    wall = engine.walls[0]
+    print('First wall created: [')
+    for layer in wall.layers:
+        print(f"     {layer}")
 
+    print(']')

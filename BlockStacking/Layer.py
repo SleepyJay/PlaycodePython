@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 
 class Layer(object):
     """A class representing a Layer, a collection of Blocks"""

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from Engine import Engine
+from BlockStacking.Engine import Engine
 from datetime import datetime
 import sys
 
@@ -12,6 +12,8 @@ target_width = 27
 target_height = 7
 width_small = 3
 width_large = 4.5
+
+print(f"Building walls {target_width} W x {target_height} H using block sizes [{width_small}, {width_large}]")
 
 if len(sys.argv) > 1:
     target_width = float(sys.argv[1])

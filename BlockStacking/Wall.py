@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 
 class Wall(object):
     """A class representing a Wall, as a collection of Layers"""

@@ -1,8 +1,7 @@
-#!/usr/bin/python
 
-from Block import Block
-from Layer import Layer
-from Wall import Wall
+from BlockStacking.Block import Block
+from BlockStacking.Layer import Layer
+from BlockStacking.Wall import Wall
 
 
 class Engine(object):
@@ -34,7 +33,7 @@ class Engine(object):
         for block in self.blocks:
             if block.size > width:
                 continue
-            layer = Layer( [block] )
+            layer = Layer([block])
             queue.append(layer)
 
         while len(queue):
@@ -44,13 +43,13 @@ class Engine(object):
                     if layer.width + block.size > width:
                         continue
                     # lazy clone:
-                    newLayer = Layer(layer.blocks)
-                    newLayer.add(block)
+                    new_layer = Layer(layer.blocks)
+                    new_layer.add(block)
 
-                    if newLayer.width == width:
-                        final.append(newLayer)
+                    if new_layer.width == width:
+                        final.append(new_layer)
                     else:
-                        next_queue.append(newLayer)
+                        next_queue.append(new_layer)
 
             queue = next_queue
             
@@ -58,7 +57,6 @@ class Engine(object):
         self.current_width = width
         
         self.precache_layers()
-
 
     #
     def precache_layers(self):
@@ -79,7 +77,7 @@ class Engine(object):
         final = []
 
         for layer in self.layers:
-            wall = Wall( [layer] )
+            wall = Wall([layer])
             queue.append(wall)
 
         if height == 1:
@@ -91,13 +89,13 @@ class Engine(object):
             for wall in queue:
                 top = wall.top()
                 for layer in top.can_be_stacked:
-                    newWall = Wall(wall.layers)
-                    newWall.add(layer)
+                    new_wall = Wall(wall.layers)
+                    new_wall.add(layer)
 
-                    if newWall.height == height:
-                        final.append(newWall)
+                    if new_wall.height == height:
+                        final.append(new_wall)
                     else:
-                        next_queue.append(newWall)
+                        next_queue.append(new_wall)
                         
             queue = next_queue
 
@@ -112,18 +110,18 @@ class Engine(object):
             return len(self.layers)
 
         total = 0
-        for l in range(height, 1, -1):
+        for h in range(height, 1, -1):
             for layer in self.layers:
-                if l == height:
+                if h == height:
                     count = len(layer.can_be_stacked)
-                    layer.levels[l] = count
+                    layer.levels[h] = count
                 else:
                     count = 0
                     for stackable in layer.can_be_stacked:
-                        if l+1 in stackable.levels:
-                            count += stackable.levels[l+1]
+                        if h+1 in stackable.levels:
+                            count += stackable.levels[h+1]
 
-                        layer.levels[l] = count
+                        layer.levels[h] = count
 
         # I know this seems weird that I'm using 2, but it represents the
         # running sum of combinations of stacking TO that level, i.e. from 1->2.
@@ -136,9 +134,7 @@ class Engine(object):
     def wall_count(self):
         return len(self.walls)
 
-
     #
     def __repr__(self):
         return str(self.__dict__)
 
-    #
