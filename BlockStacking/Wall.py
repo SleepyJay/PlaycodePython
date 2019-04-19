@@ -3,11 +3,11 @@ class Wall(object):
     """A class representing a Wall, as a collection of Layers"""
 
     #
-    def __init__(self, layers=[]):
+    def __init__(self, layers=None):
         self.layers = []
         self.height = 0
 
-        self.add_many(layers)
+        self.add_many(layers or [])
 
     #
     def add(self, layer):

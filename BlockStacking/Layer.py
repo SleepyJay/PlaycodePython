@@ -3,7 +3,7 @@ class Layer(object):
     """A class representing a Layer, a collection of Blocks"""
     
     #
-    def __init__(self, blocks=[]):
+    def __init__(self, blocks=None):
         self.blocks = []
         self.width = 0
 
@@ -12,7 +12,7 @@ class Layer(object):
         self.levels = {}
         self.width_set = set()
         
-        self.add_many(blocks)
+        self.add_many(blocks or [])
 
     #
     def add(self, block):
@@ -38,7 +38,3 @@ class Layer(object):
     #
     def __repr__(self):
         return str(self.blocks)
-
-
-
-
