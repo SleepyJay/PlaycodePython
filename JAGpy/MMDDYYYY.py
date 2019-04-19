@@ -32,5 +32,5 @@ def now_string():
 
 #
 def add_days(dt_obj, d):
-    return ( dt_obj + timedelta(days=d) )
+    return dt_obj + timedelta(days=d)
 

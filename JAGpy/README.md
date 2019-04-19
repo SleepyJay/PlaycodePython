@@ -13,3 +13,7 @@ I had a project using a lot of dates and this made things simpler. 'Nuff said.
 I wrote this to avoid checking for missing keys over and over.
 I figured there might be other useful stuff later.
 (Tests not provided.)
+
+## Numbers
+Some generic number functions.
+(Tests not provided.)

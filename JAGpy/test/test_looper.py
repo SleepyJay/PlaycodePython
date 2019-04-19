@@ -1,14 +1,12 @@
-# This is for Pythonista (iOS) -- appears safe for more robust solutions (PyCharm)
-import sys
-sys.path.append('..')
-    
-import Looper
+#!/usr/bin/python
+
 import unittest
 from collections import Counter
-from helpers import loop_to_3
+import JAGpy.Looper as Looper
+from JAGpy.test.helpers import loop_to_3
 
 
-class Test_Looper(unittest.TestCase):
+class TestLooper(unittest.TestCase):
     #
     def test_combos(self):
         items = Looper.combos(0, 2, 3)
@@ -31,7 +29,6 @@ class Test_Looper(unittest.TestCase):
         boring = loop_to_3()
         self.assertEqual(Counter(map(str, items)), Counter(map(str, boring)))
 
-
     #
     def test_list_to_value(self):
         self.assertEqual(Looper.list_to_value(2, [1, 1]), 3 )
@@ -45,7 +42,6 @@ class Test_Looper(unittest.TestCase):
 
         boring = range(0, 8)
         self.assertEqual(Counter(map(str, items)), Counter(map(str, boring)))
-
 
     #
     def test_combo_step(self):

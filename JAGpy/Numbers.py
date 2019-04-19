@@ -1,5 +1,5 @@
 
-"""This is a bunch of sugar around Python collections."""
+"""Some easy number functions"""
 
 
 #
@@ -11,10 +11,12 @@ def has_sign(val):
     else:
         return 0
 
+
+# While it may be Pythonic to check for an int by using Exception, it's a bit...unweildly. So, compromise?
 def is_int(val):
     try:
         int(val)
-    except:
+    except TypeError:
         return False
     else:
         return True

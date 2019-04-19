@@ -1,4 +1,6 @@
 
+"""Helpers for tests"""
+
 
 # only does size 3 (for reference)
 def loop_to_3(stop=2):

@@ -10,6 +10,7 @@ def lookup(collection, key, if_none=None):
     else:
         return if_none
 
+
 #
 def lookup_any(collection, keys, if_none=None):
     for key in keys:
@@ -19,6 +20,7 @@ def lookup_any(collection, keys, if_none=None):
             return val
 
     return if_none
+
 
 #
 def lookup_all(collection, keys, if_none=None):

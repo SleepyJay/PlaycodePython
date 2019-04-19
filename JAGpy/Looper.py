@@ -35,22 +35,22 @@ def combo_step(start, stop, items):
 # Turn a number in to a list of "bits" of a given base.
 def value_to_list(base, value, size=None):
     my_list = []
-    high = base-1
+    high = base - 1
 
-    iter = value
-    while iter > high:
-         res = divmod(iter, base)
-         iter = res[0]
-         my_list.append(res[1])
-    
-    my_list.append(iter)
+    it = value
+    while it > high:
+        res = divmod(it, base)
+        it = res[0]
+        my_list.append(res[1])
+
+    my_list.append(it)
 
     if size:
         while len(my_list) < size:
             my_list.append(0)
 
     my_list.reverse()
-    
+
     return my_list
 
 
@@ -66,5 +66,3 @@ def list_to_value(base, my_list):
         mul *= base
 
     return val
-
-
