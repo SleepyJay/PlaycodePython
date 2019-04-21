@@ -1,12 +1,14 @@
+#!/usr/bin/python
+
 # Run Tube journeys
 
-from LondonTube import LondonTube
+from LondonTube.Engine import Engine
 
 STOPS_AWAY = 5
-TUBE_FILENAME = './London tube lines.csv.txt'
+TUBE_FILENAME = './data/London tube lines.csv.txt'
 
-tubeDir = LondonTube(TUBE_FILENAME)
-found = tubeDir.findJourneys('East Ham', STOPS_AWAY)
+tubeDir = Engine(TUBE_FILENAME)
+found = tubeDir.find_journeys('East Ham', STOPS_AWAY)
 
 for nodeName in sorted(found):
     journey = found[nodeName]
@@ -14,18 +16,11 @@ for nodeName in sorted(found):
 
 print("----------------")
 
-tubeNonDir = LondonTube()
-tubeNonDir.setDirected(0)
-tubeNonDir.parseFile(TUBE_FILENAME)
-found = tubeNonDir.findJourneys('East Ham', STOPS_AWAY)
+tubeNonDir = Engine()
+tubeNonDir.set_directed(0)
+tubeNonDir.parse_file(TUBE_FILENAME)
+found = tubeNonDir.find_journeys('East Ham', STOPS_AWAY)
 
 for nodeName in sorted(found):
     journey = found[nodeName]
     print(f'{journey.furthest()} (lines = {str(", ".join(journey.lines))})')
-
-
-    
-
-
-
-	

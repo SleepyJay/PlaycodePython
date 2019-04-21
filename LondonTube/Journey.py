@@ -1,13 +1,15 @@
 
 # Data class representing the journey from one node to another and the list of lines
 
-class Journey():
+
+class Journey(object):
     
     def __init__(self, start=None):
         self.lines = []
         self.nodes = []
+
         if start:
-            self.move( (None, start) )
+            self.move([None, start])
         
     def move(self, move):
         line = move[0]
@@ -16,7 +18,7 @@ class Journey():
             return
         
         if line:
-            if not line in self.lines:
+            if line not in self.lines:
                 self.lines.append(line)
         
         self.nodes.append(node)
@@ -32,9 +34,8 @@ class Journey():
             journey.lines.append(line)
             
         return journey
-        
-    
-    def canMove(self, move):
+
+    def can_move(self, move):
         node = move[1]
         if node in self.nodes:
             return 0
@@ -44,13 +45,5 @@ class Journey():
     def furthest(self):
         return self.nodes[-1]
     
-    def nodeCount(self):
+    def node_count(self):
         return len(self.nodes)
-    
-           
-    
-    
-
-
-
-    
