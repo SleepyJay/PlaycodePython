@@ -1,11 +1,18 @@
 #!/usr/bin/python
 
 import unittest
+import sys
 from datetime import datetime
 from BlockStacking.Engine import Engine
 
+SLOW_OK = False
+MAX_SECS = 8
 
-# 392,312,088,153,557,198
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'slow':
+        print("Slow tests allowed to run...")
+        SLOW_OK = True
+
 
 class TestEngine(unittest.TestCase):
 
@@ -22,10 +29,14 @@ class TestEngine(unittest.TestCase):
             {'name': 'Build  48 x 6',  'width': 48,  'height': 6,  'expected': 3919649942},
             {'name': 'Build  48 x 8',  'width': 48,  'height': 8,  'expected': 1722438038790},
             {'name': 'Build  48 x 10', 'width': 48,  'height': 10, 'expected': 806844323190414},
-            {'name': 'Build  48 x 12', 'width': 48,  'height': 12, 'expected': 392312088153557198},
+            {'name': 'Build  48 x 12', 'width': 48,  'height': 12, 'expected': 392312088153557198}, # 392,312,088,153,557,198
         ]
 
         for test in tests:
+            if not SLOW_OK and test['width'] > 27:
+                print("Skipping long tests (width: {}) while SLOW_OK is false".format(test['width']))
+                continue
+
             started = datetime.now()
 
             engine = Engine()
@@ -41,9 +52,9 @@ class TestEngine(unittest.TestCase):
             ended = datetime.now()
             duration = ended - started
 
-            self.assertLessEqual(duration.seconds, 10, 'Ran in less than 10 seconds')
+            self.assertLessEqual(duration.seconds, MAX_SECS, 'Ran in less than 10 seconds')
             print("Ran in: ~ {}.{} seconds".format(duration.seconds, duration.microseconds))
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main(verbosity=3)
