@@ -25,7 +25,7 @@ class Test_CronEntry(unittest.TestCase):
         self.test_month_data = [self.TestItem('month 1', '1', [1])]
         self.test_weekday_data = [self.TestItem('Monday', '1', [CronEntry.Monday])]
 
-    # This is just to test the split mechanism
+    # This is just to tests the split mechanism
     def test_ParseMinutes(self):
         self.setup()
 
