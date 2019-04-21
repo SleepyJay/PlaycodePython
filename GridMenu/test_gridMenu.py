@@ -1,4 +1,4 @@
-# Diamond Puzzle Solver: test.py
+# Diamond Puzzle Solver: tests.py
 
 # Unit tests
 
