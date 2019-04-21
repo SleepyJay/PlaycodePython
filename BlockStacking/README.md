@@ -2,13 +2,29 @@
 
 The idea is that you have certain sized blocks, in the general case one is 3 cm and the other is 4.5 cm, for which you want to build a wall of various widths and heights using these blocks. When stacking, blocks must overlap all  "seams" that appear in the layer below. 
 
+The other point was to 
+
 ####Running
 
-There are no build instructions. CLI should work fine.  
+There are no build instructions. You have a few choices on what you might run.
+
+First, there are "tests". Really, these just excercise the wall counting algorithm, making sure the expected number of walls come back in a reasonable amount of time.
+
+
+
+
 
 There are three runnable choices:
 
-1. `tests/test_Engine.py`: runs several different block scenarios and counts possible walls (efficient). This ends with finding 392 Quadrillion, 48 x 12 walls combos in under 7 seconds.
+1. Run tests:
+    * The main point of this was
+    1. `python test.py`: run all "fast" tests currently available.
+    2. `python test.py slow`: will run all tests currently available, including slow ones.
+    3. 
+
+
+
+`prove tests/test_Engine.py`: runs several different block scenarios and counts possible walls (efficient). This ends with finding 392 Quadrillion, 48 x 12 walls combos in under 7 seconds.
 2. `build_walls.py`: does actual wall building (inefficient), instead of just counting. This is really slow. Accepts width and height arguments on command line (see performance below). Prints one wall. (Default 42 x 4) 
 3. `run.py`: will do wall counting (efficient) for passed in width and height (default 27 x 7).   
 
