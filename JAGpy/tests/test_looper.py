@@ -3,7 +3,7 @@
 import unittest
 from collections import Counter
 import JAGpy.Looper as Looper
-from JAGpy.test.helpers import loop_to_3
+from JAGpy.tests.helpers import loop_to_3
 
 
 class TestLooper(unittest.TestCase):
