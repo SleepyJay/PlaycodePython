@@ -17,7 +17,7 @@ if len(sys.argv) > 1:
 class TestEngine(unittest.TestCase):
 
     def test_BuildWalls(self):
-        print('')
+        print()
         tests = [
             {'name': 'Build 7.5 x 0',  'width': 7.5, 'height': 0,  'expected': 0},
             {'name': 'Build 7.5 x 1',  'width': 7.5, 'height': 1,  'expected': 2},
@@ -52,7 +52,7 @@ class TestEngine(unittest.TestCase):
             ended = datetime.now()
             duration = ended - started
 
-            self.assertLessEqual(duration.seconds, MAX_SECS, 'Ran in less than 10 seconds')
+            self.assertLessEqual(duration.seconds, MAX_SECS, f"Ran in fewer than {MAX_SECS} seconds")
             print("Ran in: ~ {}.{} seconds".format(duration.seconds, duration.microseconds))
 
 

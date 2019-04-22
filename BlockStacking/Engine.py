@@ -100,6 +100,7 @@ class Engine(object):
             queue = next_queue
 
         self.walls = final
+        return len(self.walls)
 
     #
     def count_walls(self, height):
