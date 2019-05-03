@@ -3,42 +3,39 @@
 # Unit tests
 
 import unittest
-import collections
-from CronParser import CronParser, LineType
+from collections import namedtuple
+from CronParser.CronParser import CronParser, LineType, Schedule
+
+TestLine = namedtuple('TestLine', 'name, line, expected')
+TestSchedule = namedtuple('TestSchedule', 'name, sched_str, expected')
 
 
 class Test_CronParser(unittest.TestCase):
     
     #
     def setup(self):
-        print()
-
         self.cron_parser = CronParser()
-        self.TestLine = collections.namedtuple('TestLine', ['name', 'line', 'expected'])
 
         self.test_line_data = [
-            self.TestLine('Empty line', '', LineType.empty),
-            self.TestLine('Comment line', '# Foo', LineType.comment),
-            self.TestLine('Missing command *:01', '1 * * * *', None),
-            self.TestLine('Missing schedule', 'echo Foo', None),
+            TestLine('Empty line', '', LineType.empty),
+            TestLine('Comment line', '# Foo', LineType.comment),
+            TestLine('Missing command *:01', '1 * * * *', None),
+            TestLine('Missing schedule', 'echo Foo', None),
 
-            self.TestLine('Daily *:01', '1 * * * * echo Daily', LineType.cron),
-            self.TestLine('Daily nums', '1 2 3 4 5 echo Daily', LineType.cron),
-            self.TestLine('Daily *:01, pound', '1 * * * * # echo Daily', LineType.cron),
+            TestLine('Daily *:01', '1 * * * * echo Daily', LineType.cron),
+            TestLine('Daily nums', '1 2 3 4 5 echo Daily', LineType.cron),
+            TestLine('Daily *:01, pound', '1 * * * * # echo Daily', LineType.cron),
         ]
 
         self.expected_test_data_cron_count = 3
         self.expected_test_file_cron_count = 2
 
-        self.TestSchedule = collections.namedtuple(
-            'TestSchedule', ['name', 'sched_str', 'expected'])
-
         self.test_schedule_data = [
             # name, line, minutes, hours, month_days, months, weekdays
-            self.TestSchedule('Daily *:01', '1 * * * *',
-                              self.cron_parser.Schedule('1', '*', '*', '*', '*')),
-            self.TestSchedule('Daily nums', '1 2 3 4 5',
-                              self.cron_parser.Schedule('1', '2', '3', '4', '5'))
+            TestSchedule('Daily *:01', '1 * * * *',
+                         Schedule('1', '*', '*', '*', '*')),
+            TestSchedule('Daily nums', '1 2 3 4 5',
+                         Schedule('1', '2', '3', '4', '5'))
         ]
 
     #
@@ -74,7 +71,7 @@ class Test_CronParser(unittest.TestCase):
     #
     def test_ParseFile(self):
         self.setup()
-        parsed_list = self.cron_parser.parse_file('./crontab_test')
+        parsed_list = self.cron_parser.parse_file('./crontab_test_data')
 
         list_count = len(parsed_list)
         self.assertEqual(list_count, self.expected_test_file_cron_count,

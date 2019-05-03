@@ -4,8 +4,8 @@
 
 import unittest
 import collections
-from CronParser import CronParser
-from CronEntry import CronEntry
+from CronParser.CronParser import CronParser, Schedule
+from CronParser.CronEntry import CronEntry
 
 
 class Test_CronEntry(unittest.TestCase):
@@ -15,7 +15,7 @@ class Test_CronEntry(unittest.TestCase):
         print()
 
         cron_parser = CronParser()
-        self.cron_entry = CronEntry(cron_parser.Schedule('*', '*', '*', '*', '*'), '#')
+        self.cron_entry = CronEntry(Schedule('*', '*', '*', '*', '*'), '#')
 
         self.TestItem = collections.namedtuple('TestItem', ['name', 'value', 'expected'])
 
