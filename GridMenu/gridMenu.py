@@ -1,10 +1,10 @@
-''# GridMenu
 
 from collections import namedtuple
+import string
 
 NamedMoves = namedtuple('NamedMoves', ['enter', 'backsp', 'space', 'down', 'up', 'left', 'right'])
 
-ENTER	= 'E'
+ENTER   = 'E'
 BACKSP	= 'B'
 SPACE	= 'S'
 DOWN 	= 'D'
@@ -12,14 +12,15 @@ UP		= 'U'
 LEFT	= 'L'
 RIGHT	= 'R'
 
+ALPHABET = list(string.ascii_uppercase)
+
 
 class GridMenu(object):
 
-    #
-    def __init__(self, cols, alphabet):
+    def __init__(self, cols=6, alphabet=None):
         self.cols = cols
-        self.alphabet = alphabet
-        self.last = len(alphabet)-1
+        self.alphabet = alphabet or ALPHABET
+        self.last = len(self.alphabet)-1
         self.debug = 0
 
         rows = int(self.last / self.cols)
@@ -31,21 +32,23 @@ class GridMenu(object):
         self.string = ''
         self.position = 0
 
-    #
     def move_many(self, moves):
         for move in moves:
-            if move == ENTER:
-                self.string += self.get_letter()
-            elif move == BACKSP:
-                self.string[:-1]
-            else:
-                self.move(move)
+            self.move(move)
 
         return self.string
 
-    #
     def move(self, move):
-        if move == DOWN:
+        if move == ENTER:
+            self.grab_letter()
+
+        elif move == BACKSP:
+            self.string = self.string[:-1]
+
+        elif move == SPACE:
+            self.string += ' '
+
+        elif move == DOWN:
             if self.at_bottom_edge():
                 self.position = self.position + self.cols - self.full
                 self.log_debug("DOWN + AtBottomEdge: " + self.get_letter())
@@ -113,29 +116,24 @@ class GridMenu(object):
 
         return rtn
 
+    def grab_letter(self):
+        self.string += self.get_letter()
+
     def at_left_edge(self):
-        return (self.position % self.cols == 0)
+        return self.position % self.cols == 0
 
     def at_right_edge(self):
-        return ( (self.position % self.cols) + 1 == self.cols)
+        return (self.position % self.cols) + 1 == self.cols
 
     def at_top_edge(self):
-        return (self.position < self.cols)
+        return self.position < self.cols
 
     def at_bottom_edge(self):
-        return (self.position >= (self.full - self.cols) )
+        return self.position >= (self.full - self.cols)
 
     def in_empty_pos(self):
-        return (self.position > self.last)
+        return self.position > self.last
 
     def log_debug(self, message):
-        if self.DEBUG:
+        if self.debug:
             print(message)
-
-
-
-
-# 0 1 2 3
-# 4 5 6 7
-# 8 9
-''

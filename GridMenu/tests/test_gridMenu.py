@@ -5,7 +5,7 @@
 import string
 import unittest
 
-from GridMenu import GridMenu
+from GridMenu.GridMenu import GridMenu
 
 alphabet = list(string.ascii_lowercase)
 grid = GridMenu(6, alphabet)
@@ -20,7 +20,6 @@ class Test_GridMenu(unittest.TestCase):
 			{'moves': ['L', 'E'], 'expected': 'f'},
 			{'moves': ['R', 'L', 'E'], 'expected': 'a'},
 			{'moves': ['U', 'R', 'R', 'E'], 'expected': 'y'}
-			
 		]
 		
 		for test in tests:

@@ -1,25 +1,25 @@
-# Run Solvers
 
-import sys
-import string
+from GridMenu.GridMenu import GridMenu
 
-from GridMenu import GridMenu
+print()
 
-alphabet = list(string.ascii_lowercase)
+for i in [3,4,5,6,7,8,9]:
+    grid = GridMenu(i)
 
-grid = GridMenu(6,alphabet)
+    grid.clear()
+    grid.move_many(['D', 'R', 'E'])
+    grid.move_many(['U', 'R', 'R', 'R', 'E'])
+    grid.move_many(['D', 'R', 'E'])
+    grid.move('E')
+    grid.move_many(['D', 'L', 'L', 'L', 'E'])
+    grid.move('S')
+    grid.move_many(['D', 'R', 'R', 'E'])
+    grid.move_many(['U', 'L', 'L', 'E'])
+    grid.move_many(['L', 'L', 'L', 'E'])
+    grid.move_many(['U', 'E'])
+    grid.move_many(['U', 'L', 'L', 'E'])
 
-grid.clear()
-grid.move('D')
-print(grid.get_position())
-
-
-# print grid.moveMany(['E']) ; grid.clear()
-# print grid.moveMany(['D', 'E']) ; grid.clear()
-# print grid.moveMany(['U', 'E']) ; grid.clear()
-# print grid.moveMany(['R', 'E']) ; grid.clear()
-# print grid.moveMany(['L', 'E']) ; grid.clear()
-
+    print(grid.get_string())
 
 
 # a b c d e f
@@ -28,7 +28,3 @@ print(grid.get_position())
 # s t u v w x
 # y z 
 
-
-
-
-	
