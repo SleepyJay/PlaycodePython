@@ -2,164 +2,144 @@
 
 import collections
 
+
 class NameDistro(object):
-	
-	#
-	def __init__(self):
-		self.GroupTuple = collections.namedtuple('Group', ['items', 'sum'])
-		self.GroupingFunction = collections.namedtuple('GroupingFunction', ['name', 'func'])
-		self.Result = collections.namedtuple('Result', ['groups', 'total'])
-		self.GroupData = collections.namedtuple('GroupData', ['name', 'items'])
 
-		self.group_data = [
-			self.GroupData("Tens", [ 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]),
-			self.GroupData("Fibo", [ 1, 2, 4, 8, 16, 32, 64, 128, 256 ]),
-			self.GroupData("Geo2", [ 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ]),
-			self.GroupData("Mix1", [ 1, 55, 1, 34, 2, 21, 3, 13, 5, 8 ]),
-			self.GroupData("Mix2", [ 2, 55, 1, 34, 1, 3, 21, 8, 13, 5 ]),
-		]
+    def __init__(self):
+        self.GroupTuple = collections.namedtuple('Group', ['items', 'sum'])
+        self.GroupingFunction = collections.namedtuple('GroupingFunction', ['name', 'func'])
+        self.Result = collections.namedtuple('Result', ['groups', 'total'])
+        self.GroupData = collections.namedtuple('GroupData', ['name', 'items'])
 
-		self.group_functions = [
-			self.GroupingFunction("Silly_Simple", self.sillySimple),
-			self.GroupingFunction("Until_Math", self.untilMath),
-		]
+        self.group_data = [
+            self.GroupData("Tens", [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]),
+            self.GroupData("Geo2", [1, 2, 4, 8, 16, 32, 64, 128, 256]),
+            self.GroupData("Fibo", [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]),
+            self.GroupData("Mix1", [1, 55, 1, 34, 2, 21, 3, 13, 5, 8]),
+            self.GroupData("Mix2", [2, 55, 1, 34, 1, 3, 21, 8, 13, 5]),
+        ]
 
-	#
-	def evaluate(self, result):
-		min_val = result.groups[0].sum
-		max_val = min_val
+        self.group_functions = [
+            self.GroupingFunction("Silly_Simple", self.silly_simple),
+            self.GroupingFunction("Until_Math", self.until_math),
+        ]
 
-		for grp in result.groups:
-			if grp.sum < min_val:
-				min_val = grp.sum
+    def evaluate(self, result):
+        min_val = result.groups[0].sum
+        max_val = min_val
 
-			if grp.sum > max_val:
-				max_val = grp.sum
+        for grp in result.groups:
+            if grp.sum < min_val:
+                min_val = grp.sum
 
-		return max_val - min_val
+            if grp.sum > max_val:
+                max_val = grp.sum
 
+        return max_val - min_val
 
 ## Group Algorithms:
-	def genericGrouper(self, group_max, ):
-		s = 0 # group index var
-		g = 1 # group count so far
+    def generic_grouper(self, group_max, items):
+        s = 0 # group index var
+        g = 1 # group count so far
 
-		total = 0
-		group_total = 0
-		group = []
-		groups = []
+        print("NOT IMPLEMENTED")
+        return
 
-		for i in range(len(items)):
-			value = items[i]
-			#print "item_{}: {}".format(i,value)
+        total = 0
+        group_total = 0
+        group = []
+        groups = []
 
-			if g != group_count:
-				if s >= group_max:
-					gt = self.GroupTuple(group, group_total)
-					groups.append(gt)
+        for i in range(len(items)):
+            value = items[i]
+            #print "item_{}: {}".format(i,value)
 
-					s = 0
-					g += 1
-					group_total = 0
-					group = []
+            if g != group_count:
+                if s >= group_max:
+                    gt = self.GroupTuple(group, group_total)
+                    groups.append(gt)
 
-
-			group.append(i)
-			group_total += value
-			total += value
-			s += 1
-
-		if len(group):
-			gt = self.GroupTuple(group, group_total)
-			groups.append(gt)
-
-		result = self.Result(groups, total)
-		return result
+                    s = 0
+                    g += 1
+                    group_total = 0
+                    group = []
 
 
+            group.append(i)
+            group_total += value
+            total += value
+            s += 1
 
+        if len(group):
+            gt = self.GroupTuple(group, group_total)
+            groups.append(gt)
 
-	#
-	def sillySimple(self, group_count, items):
-		s = 0 # group index var
-		g = 1 # group count so far
-		
-		total = 0
-		group_total = 0
-		group = []
-		groups = []
-		group_max = len(items) / group_count
+        result = self.Result(groups, total)
+        return result
 
-		for i in range(len(items)):
-			value = items[i]
-			#print "item_{}: {}".format(i,value)
+    def silly_simple(self, group_count, items):
+        s = 0 # group index var
+        g = 1 # group count so far
 
-			if g != group_count:
-				if s >= group_max:
-					gt = self.GroupTuple(group, group_total)
-					groups.append(gt)
+        total = 0
+        group_total = 0
+        group = []
+        groups = []
+        group_max = len(items) / group_count
 
-					s = 0
-					g += 1
-					group_total = 0
-					group = []
-					
+        for i in range(len(items)):
+            value = items[i]
 
-			group.append(i)
-			group_total += value
-			total += value
-			s += 1
+            if g != group_count:
+                if s >= group_max:
+                    gt = self.GroupTuple(group, group_total)
+                    groups.append(gt)
 
-		if len(group):
-			gt = self.GroupTuple(group, group_total)
-			groups.append(gt)
+                    s = 0
+                    g += 1
+                    group_total = 0
+                    group = []
 
-		result = self.Result(groups, total)
-		return result
-					
-				
-				
-	#
-	def untilMath(self, group_count, items):
-		g = 1 # group count so far
+            group.append(i)
+            group_total += value
+            total += value
+            s += 1
 
-		total = 0
-		group_total = 0
-		group = []
-		groups = []
-		group_max = sum(items)/group_count
+        if len(group):
+            gt = self.GroupTuple(group, group_total)
+            groups.append(gt)
 
-		for i in range(len(items)):
-			value = items[i]
+        result = self.Result(groups, total)
+        return result
 
-			if g != group_count:
-				if group_total > group_max or len(items)-i == group_count-g:
-					gt = self.GroupTuple(group, group_total)
-					groups.append(gt)
+    def until_math(self, group_count, items):
+        g = 1 # group count so far
 
-					g += 1
-					group_total = 0
-					group = []
-					
-			group.append(i)
-			group_total += value
-			total += value
+        total = 0
+        group_total = 0
+        group = []
+        groups = []
+        group_max = sum(items)/group_count
 
-		if len(group):
-			gt = self.GroupTuple(group, group_total)
-			groups.append(gt)
+        for i in range(len(items)):
+            value = items[i]
 
-		result = self.Result(groups, total)
-		return result
-	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+            if g != group_count:
+                if group_total > group_max or len(items)-i == group_count-g:
+                    gt = self.GroupTuple(group, group_total)
+                    groups.append(gt)
+
+                    g += 1
+                    group_total = 0
+                    group = []
+
+            group.append(i)
+            group_total += value
+            total += value
+
+        if len(group):
+            gt = self.GroupTuple(group, group_total)
+            groups.append(gt)
+
+        result = self.Result(groups, total)
+        return result
