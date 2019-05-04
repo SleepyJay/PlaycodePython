@@ -11,7 +11,7 @@ class Test_DiamondPuzzle(unittest.TestCase):
 
     def test_reset(self):
         dp.reset()
-        board_str = dp.getBoardState()
+        board_str = dp.get_board_state()
         self.assertEqual(board_str, dp.starting_point, "Reset OK")
 
 
@@ -31,9 +31,9 @@ class Test_DiamondPuzzle(unittest.TestCase):
 
         for i in range(len(expected_changes)):
             mv = i
-            orig = dp.getBoardState()
+            orig = dp.get_board_state()
             dp.move(mv)
-            curr = dp.getBoardState()
+            curr = dp.get_board_state()
 
             expected = expected_changes[i]
             ok = 1
@@ -54,7 +54,7 @@ class Test_DiamondPuzzle(unittest.TestCase):
         self.isBoardSolved(reversed(expected))
 
         dp.solveAttempts = 0
-        best = sorted(dp.solveShortest(1))
+        best = sorted(dp.solve_shortest(1))
         self.isBoardSolved(best)
         print("Best ({}): {}".format(dp.solveAttempts, best))
 
@@ -73,9 +73,9 @@ class Test_DiamondPuzzle(unittest.TestCase):
 
     #
     def isBoardSolved(self, solution):
-        ok = dp.confirmSolution(solution)
+        ok = dp.confirm_solution(solution)
         ok_str = ("PASS" if ok else "FAIL")
-        curr = dp.getBoardState()
+        curr = dp.get_board_state()
         print("Solved: {} == {} : {}".format(curr, dp.goal, ok_str))
 
 
