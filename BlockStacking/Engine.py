@@ -2,6 +2,7 @@
 from BlockStacking.Block import Block
 from BlockStacking.Layer import Layer
 from BlockStacking.Wall import Wall
+from BlockStacking.LayerSearchTree import LayerSearchTree
 
 
 class Engine(object):
@@ -13,6 +14,7 @@ class Engine(object):
         self.layers = []
         self.walls = []
         self.current_width = 0
+        self.stree = LayerSearchTree()
 
     #
     def build_blocks(self, *sizes):
@@ -52,24 +54,19 @@ class Engine(object):
                         next_queue.append(new_layer)
 
             queue = next_queue
-            
-        self.layers = final
+
         self.current_width = width
-        
+        self.layers = final
+
+        for layer in final:
+            self.stree.add(layer.width_list, layer)
+
         self.precache_layers()
 
     #
     def precache_layers(self):
-        layer_len = len(self.layers)
-        for i in range(layer_len):
-            layer = self.layers[i]
-            for j in range(i, layer_len):
-                under = self.layers[j]
-                stackable = under.check_can_stack(layer)
-
-                if stackable:
-                    under.can_be_stacked.add(layer)
-                    layer.can_be_stacked.add(under)
+        for layer in self.layers:
+            layer.can_be_stacked = self.stree.find_stackable(layer)
 
     #
     def build_walls(self, height):

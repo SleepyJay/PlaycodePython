@@ -11,6 +11,7 @@ class Layer(object):
         self.cannot_stack = set()
         self.levels = {}
         self.width_set = set()
+        self.width_list = []
         
         self.add_many(blocks or [])
 
@@ -19,6 +20,7 @@ class Layer(object):
         self.blocks.append(block)
         self.width += block.size
         self.width_set.add(self.width)
+        self.width_list.append(self.width)
 
     #
     def add_many(self, blocks):
