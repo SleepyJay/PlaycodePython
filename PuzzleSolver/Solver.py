@@ -13,10 +13,10 @@ class Solver(object):
         self.goal = self.to_int_list(goal)
 
         self.solutions = []
-        self.prevStates = {}
-        self.currentState = []
+        self.prev_states = {}
+        self.current_state = []
         self.iterations = []
-        self.solveAttempts = 0
+        self.solve_attempts = 0
 
         self.board = None
 
@@ -33,9 +33,9 @@ class Solver(object):
             self.set_int(i, int(vals[i]))
 
     def get_board_state(self):
-        if not self.currentState:
-            self.currentState = self.calc_board_state()
-        return self.currentState
+        if not self.current_state:
+            self.current_state = self.calc_board_state()
+        return self.current_state
 
     def calc_board_state(self):
         board = []
@@ -44,7 +44,7 @@ class Solver(object):
         return board
 
     def clear_board_state(self):
-        self.currentState = []
+        self.current_state = []
 
     def to_int_list(self, str_):
         return [int(x) for x in list(str_)]
@@ -122,7 +122,7 @@ class Solver(object):
                 min_ = len(s)
                 best = s
 
-        self.solveAttempts += 1
+        self.solve_attempts += 1
         return best
 
     def confirm_solution(self, solution):
